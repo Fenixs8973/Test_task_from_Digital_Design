@@ -66,6 +66,8 @@ class TextStatistics
         
         element = QuickSort(element, 0, element.Length - 1);
 
+        File.WriteAllText(PathToResultFile, "");
+
         for(int i = 0; i < ValueLines; i++)
         {
             string KeyValue = $"{element[i].GetWord(), -20} {element[i].GetValue()}\n";
@@ -80,7 +82,7 @@ class TextStatistics
         Element temp = new Element();
         for(int i = minIndex; i < maxIndex; i++)
         {
-            if(array[i].GetValue() < array[maxIndex].GetValue())
+            if(array[i].GetValue() > array[maxIndex].GetValue())
             {
                 pivot++;
                 temp.SetValue(array[pivot].GetValue());
