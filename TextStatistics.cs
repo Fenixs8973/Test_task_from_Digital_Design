@@ -5,10 +5,10 @@ class TextStatistics
 {
     struct Element
     {
-        private string Word;
+        private string Word {get; set; }
+        private int Value {get; set; }
         public string GetWord(){return Word;}
         public void SetWord(string Word){this.Word = Word;}
-        private int Value;
         public int GetValue(){return Value;}
         public void SetValue(int Value){this.Value = Value;}
         public Element(string word, int value)
@@ -19,55 +19,54 @@ class TextStatistics
     }
     public void Processtng(string path)
     {
-        string PathToResultFile = "rating.txt";
+        string PathToResultFile = "Result.txt";
 
-        Dictionary<string, int> rating = new Dictionary<string, int>();//Словарь, куда в начале будут добавляться слова и их количество
-        Regex regex = new Regex(@"\w+");//Выделяет слово
+        //Словарь, куда в начале будут добавляться слова и их количество
+        Dictionary<string, int> rating = new Dictionary<string, int>();
 
+        //Выделяет слово
+        Regex regex = new Regex(@"\w+");
+
+        //Считвает файл после форматирования
         string text = File.ReadAllText(path);
+
         MatchCollection matches = regex.Matches(text);
         int ValueLines = 0;
-        foreach(Match match in matches)//Записывает в Словарь новые слова
+
+        //Записывает в cловарь новые слова
+        foreach(Match match in matches)
         {
-            if(rating.ContainsKey(match.ToString()) != false)//Если слово уже есть в Словарь, то прибавляет 1
+            //Если слово уже есть в словаре, то переходит к следующему
+            if(rating.ContainsKey(match.ToString()) != false)
             {
-                rating[match.ToString()] += 1;
+                rating[match.ToString()]++;
             }
+            //Если слова нету, то добавляет новый элемент в словарь
             else
             {
-                rating.TryAdd(match.ToString(), 1);//Если слова нету, то добавляет новый элемент в словарь
+                rating.TryAdd(match.ToString(), 1);
                 ValueLines++;
             }
         }
-        if(!File.Exists(PathToResultFile))//Сохраняет словарь в файл. Если файла нету, то создает его
-        {
-            File.Create(PathToResultFile);
-        }
-        else
-        {
-            File.WriteAllText(PathToResultFile, "");
-        }
 
-        Element[] element = new Element[ValueLines];//Словарь переписывается в массив для сортировки
-        //Buffer(ValueLines);
-        
+        Element[] element = new Element[ValueLines];
         int h = 0;
+
+        //Словарь переписывается в массив для сортировки
         foreach(var g in rating)
         {
-            element[h].SetWord("\"" + g.Key + "\"");
+            element[h].SetWord(g.Key);
             element[h].SetValue(g.Value);
             h++;
         }
-        for(int i = 0; i < ValueLines; i++)
-        {
-            string KeyValue = $"{element[i].GetWord(), -20} {element[i].GetValue()}\n";
-            File.AppendAllText(PathToResultFile, KeyValue);
-        }
         
+        //Сортировка массива
         element = QuickSort(element, 0, element.Length - 1);
 
+        //Опустошение итогового файла, на случай если он не пустой
         File.WriteAllText(PathToResultFile, "");
 
+        //Переписывание отсортированного массива в итоговый файл
         for(int i = 0; i < ValueLines; i++)
         {
             string KeyValue = $"{element[i].GetWord(), -20} {element[i].GetValue()}\n";
@@ -76,6 +75,7 @@ class TextStatistics
         
     }
 
+    //Нахождение опорного элемента
     static int FindPivot(Element[] array, int minIndex, int maxIndex)
     {
         int pivot = minIndex - 1;
@@ -109,6 +109,7 @@ class TextStatistics
         return pivot;
     }
 
+    //Быстра сортировка
     static Element[] QuickSort(Element[] array, int minIndex, int maxIndex)
     {
         if(minIndex >= maxIndex)
