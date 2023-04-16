@@ -10,15 +10,14 @@ IN
 
 ## 2. Вывести одно число: максимальную длину цепочки руководителей по таблице сотрудников (вычислитьглубину дерева).
 ```SQL
-WITH RECURSIVE EmployeeHierarchy AS (
-  SELECT id, chief_id, 1 AS depth
+WITH RECURSIVE EmployeeHierarchy AS 
+(SELECT id, chief_id, 1 AS depth
   FROM EMPLOYEE
   WHERE chief_id IS NULL
   UNION ALL
   SELECT e.id, e.chief_id, eh.depth + 1
   FROM EMPLOYEE AS e
-  INNER JOIN EmployeeHierarchy AS eh ON e.chief_id = eh.id
-)
+  INNER JOIN EmployeeHierarchy AS eh ON e.chief_id = eh.id)
 SELECT MAX(depth) AS max_depth
 FROM EmployeeHierarchy;
 ```
