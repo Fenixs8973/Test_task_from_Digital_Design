@@ -13,5 +13,6 @@
         path = @"War_and_peace_buffer.txt";
         TS.Processtng(path);
         File.Delete(path);
+        Console.WriteLine("Программа закончила выполнение");
     }
 }
