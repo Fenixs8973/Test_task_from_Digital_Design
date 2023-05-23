@@ -1,0 +1,12 @@
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/obj/Debug/net7.0/dllTextProcess.csproj.AssemblyReference.cache
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/obj/Debug/net7.0/dllTextProcess.GeneratedMSBuildEditorConfig.editorconfig
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/obj/Debug/net7.0/dllTextProcess.AssemblyInfoInputs.cache
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/obj/Debug/net7.0/dllTextProcess.AssemblyInfo.cs
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/obj/Debug/net7.0/dllTextProcess.csproj.CoreCompileInputs.cache
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/bin/Debug/net7.0/dllTextProcess.deps.json
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/bin/Debug/net7.0/dllTextProcess.dll
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/bin/Debug/net7.0/dllTextProcess.pdb
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/obj/Debug/net7.0/dllTextProcess.dll
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/obj/Debug/net7.0/refint/dllTextProcess.dll
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/obj/Debug/net7.0/dllTextProcess.pdb
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/obj/Debug/net7.0/ref/dllTextProcess.dll

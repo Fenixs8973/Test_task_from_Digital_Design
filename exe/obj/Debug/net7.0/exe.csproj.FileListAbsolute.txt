@@ -1,0 +1,17 @@
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/bin/Debug/net7.0/exe
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/bin/Debug/net7.0/exe.deps.json
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/bin/Debug/net7.0/exe.runtimeconfig.json
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/bin/Debug/net7.0/exe.dll
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/bin/Debug/net7.0/exe.pdb
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/bin/Debug/net7.0/dllTextProcess.dll
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/exe.csproj.AssemblyReference.cache
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/exe.GeneratedMSBuildEditorConfig.editorconfig
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/exe.AssemblyInfoInputs.cache
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/exe.AssemblyInfo.cs
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/exe.csproj.CoreCompileInputs.cache
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/exe.csproj.CopyComplete
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/exe.dll
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/refint/exe.dll
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/exe.pdb
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/exe.genruntimeconfig.cache
+/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/obj/Debug/net7.0/ref/exe.dll

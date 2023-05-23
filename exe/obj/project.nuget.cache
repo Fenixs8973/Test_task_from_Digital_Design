@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "XvciQYrELerFiRdLiTeeDgyCWXudZDeETt5O0wd4tK6LZGhIFYNszeb9yi2SmVwF9u9XCq14wkSmO+kSo/Xn1g==",
+  "success": true,
+  "projectFilePath": "/home/fenixs/PetProjects/Test_task_from_Digital_Design/exe/exe.csproj",
+  "expectedPackageFiles": [
+    "/home/fenixs/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}

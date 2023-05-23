@@ -24,10 +24,8 @@ namespace TextProcessingDll
                 this.Value = value;
             }
         }
-        private Dictionary<string, int> Processtng(string text)
+        private Dictionary<string, int> Processing(string text)
         {
-            //string text = WarAndPeace.ToString();
-
             //Словарь, куда в начале будут добавляться слова и их количество
             Dictionary<string, int> rating = new Dictionary<string, int>();
 
@@ -66,6 +64,8 @@ namespace TextProcessingDll
 
             //Сортировка массива
             element = QuickSort(element, 0, element.Length - 1);
+
+            rating = new Dictionary<string, int>();
 
             foreach (var i in element)
             {
@@ -113,6 +113,7 @@ namespace TextProcessingDll
         //Быстра сортировка
         static Element[] QuickSort(Element[] array, int minIndex, int maxIndex)
         {
+            Console.WriteLine("QuickSort");
             if (minIndex >= maxIndex)
             {
                 return array;

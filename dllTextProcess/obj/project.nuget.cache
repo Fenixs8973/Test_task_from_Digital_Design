@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "358EDRH0Icqsl1dCMPMnqalKGPLB5ijrDKwnJctUGzw9JdgURmL62KEx8hJMQnqDjOgpHltlysRdAJI2t2Cq7g==",
+  "success": true,
+  "projectFilePath": "/home/fenixs/PetProjects/Test_task_from_Digital_Design/dllTextProcess/dllTextProcess.csproj",
+  "expectedPackageFiles": [
+    "/home/fenixs/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.5/microsoft.aspnetcore.app.ref.7.0.5.nupkg.sha512"
+  ],
+  "logs": []
+}
