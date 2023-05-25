@@ -24,7 +24,11 @@ namespace TextProcessingDll
                 this.Value = value;
             }
         }
-        private Dictionary<string, int> Processing(string text)
+
+        static Element[] element;
+        
+        //Публичный метод обработки
+        public Dictionary<string, int> ProcessingPublic(string text)
         {
             //Словарь, куда в начале будут добавляться слова и их количество
             Dictionary<string, int> rating = new Dictionary<string, int>();
@@ -51,7 +55,7 @@ namespace TextProcessingDll
                 }
             }
 
-            Element[] element = new Element[ValueLines];
+            element = new Element[ValueLines];
             int h = 0;
 
             //Словарь переписывается в массив для сортировки
@@ -63,7 +67,61 @@ namespace TextProcessingDll
             }
 
             //Сортировка массива
-            element = QuickSort(element, 0, element.Length - 1);
+            var thread = new Thread(() => QuickSort(element, 0, element.Length - 1));
+
+
+            rating = new Dictionary<string, int>();
+
+            foreach (var i in element)
+            {
+                rating.TryAdd(i.GetWord(), i.GetValue());
+            }
+
+            return rating;
+        }
+
+        //Приватный метод обработки
+        private Dictionary<string, int> ProcessingPrivate(string text)
+        {
+            //Словарь, куда в начале будут добавляться слова и их количество
+            Dictionary<string, int> rating = new Dictionary<string, int>();
+
+            //Выделяет слово
+            Regex regex = new Regex(@"\w+");
+
+            MatchCollection matches = regex.Matches(text);
+            int ValueLines = 0;
+
+            //Записывает в cловарь новые слова
+            foreach (Match match in matches)
+            {
+                //Если слово уже есть в словаре, то переходит к следующему
+                if (rating.ContainsKey(match.ToString()) != false)
+                {
+                    rating[match.ToString()]++;
+                }
+                //Если слова нету, то добавляет новый элемент в словарь
+                else
+                {
+                    rating.Add(match.ToString(), 1);
+                    ValueLines++;
+                }
+            }
+
+            element = new Element[ValueLines];
+            int h = 0;
+
+            //Словарь переписывается в массив для сортировки
+            foreach (var g in rating)
+            {
+                element[h].SetWord(g.Key);
+                element[h].SetValue(g.Value);
+                h++;
+            }
+
+            //Сортировка массива
+            QuickSort(element, 0, element.Length - 1);
+
 
             rating = new Dictionary<string, int>();
 
@@ -111,19 +169,23 @@ namespace TextProcessingDll
         }
 
         //Быстра сортировка
-        static Element[] QuickSort(Element[] array, int minIndex, int maxIndex)
+        static void QuickSort(Element[] array, int minIndex, int maxIndex)
         {
             Console.WriteLine("QuickSort");
             if (minIndex >= maxIndex)
             {
-                return array;
+                return;
             }
 
             int pivot = FindPivot(array, minIndex, maxIndex);
+            
             QuickSort(array, minIndex, pivot - 1);
             QuickSort(array, pivot + 1, maxIndex);
 
-            return array;
+            if(element.Length == array.Length)
+                element = array;
+
+            return;
         }
     }
 
