@@ -71,6 +71,7 @@ namespace TextProcessingDll
             return rating;
         }
 
+        static Element[] element;
         //Приватный метод обработки
         private Dictionary<string, int> ProcessingPrivate(string text)
         {
@@ -99,7 +100,7 @@ namespace TextProcessingDll
                 }
             }
 
-            Element[] element = new Element[ValueLines];
+            element = new Element[ValueLines];
             int h = 0;
 
             //Словарь переписывается в массив для сортировки
@@ -114,7 +115,7 @@ namespace TextProcessingDll
             //засекаем время начала операции
             stopwatch.Start();
             //Сортировка массива
-            element = QuickSort(element, 0, element.Length - 1);
+            QuickSort(element, 0, element.Length - 1);
             stopwatch.Stop();
             Console.WriteLine("Время личной сортировки: " + stopwatch.ElapsedMilliseconds);   
 
@@ -162,20 +163,26 @@ namespace TextProcessingDll
         }
 
         //Быстра сортировка
-        static Element[] QuickSort(Element[] array, int minIndex, int maxIndex)
+        async static Task QuickSort(Element[] array, int minIndex, int maxIndex)
         {
             Console.WriteLine("QuickSort");
             if (minIndex >= maxIndex)
             {
-                return array;
+                return;
             }
 
             int pivot = FindPivot(array, minIndex, maxIndex);
             
-            QuickSort(array, minIndex, pivot - 1);
-            QuickSort(array, pivot + 1, maxIndex);
+            var left = QuickSort(array, minIndex, pivot - 1);
+            var right =  QuickSort(array, pivot + 1, maxIndex);
 
-            return array;
+            await Task.WhenAll(left, right);
+
+            if(element.Length == array.Length)
+                element = array;
+
+
+            return;
         }
     }
 
