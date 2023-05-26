@@ -27,12 +27,6 @@ class MyClass
         stopwatch.Stop();
         Console.WriteLine("Время работыв целом через личный метод сортировки: " + stopwatch.ElapsedMilliseconds);     
 
-        stopwatch = new Stopwatch();
-        stopwatch.Start();
-        TS.ProcessingLinq(WarAndPeace);
-        stopwatch.Stop();
-        Console.WriteLine("Время работы в целом через LINQ: " + stopwatch.ElapsedMilliseconds); 
-        
         path = @"Result.txt";
         //Переписывание отсортированного массива в итоговый файл
         foreach (var i in result)
@@ -40,6 +34,21 @@ class MyClass
             string KeyValue = $"{i.Key,-20} {i.Value}\n";
             File.AppendAllText(path, KeyValue);
         }
+
+        path = @"ResultLINQ.txt";
+        stopwatch = new Stopwatch();
+        stopwatch.Start();
+        var resultLINQ = TS.ProcessingLinq(WarAndPeace);
+        stopwatch.Stop();
+        Console.WriteLine("Время работы в целом через LINQ: " + stopwatch.ElapsedMilliseconds); 
+
+        //Переписывание отсортированного массива в итоговый файл
+        foreach (var i in resultLINQ)
+        {
+            string KeyValue = $"{i.Key,-20} {i.Value}\n";
+            File.AppendAllText(path, KeyValue);
+        }
+        
         Console.WriteLine("Программа закончила выполнение");
     }
 }

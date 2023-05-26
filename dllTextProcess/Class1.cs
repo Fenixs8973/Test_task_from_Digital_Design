@@ -14,21 +14,10 @@ namespace TextProcessingDll
     {
         struct Element
         {
-            private string Word { get; set; }
-            private int Value { get; set; }
-            public string GetWord() { return Word; }
-            public void SetWord(string Word) { this.Word = Word; }
-            public int GetValue() { return Value; }
-            public void SetValue(int Value) { this.Value = Value; }
-            public Element(string word, int value)
-            {
-                this.Word = word;
-                this.Value = value;
-            }
+            public string Word { get; set; }
+            public int Value { get; set; }
         }
 
-        
-        
         //Публичный метод обработки
         public Dictionary<string, int> ProcessingLinq(string text)
         {
@@ -61,12 +50,13 @@ namespace TextProcessingDll
             //засекаем время начала операции
             stopwatch.Start();
             //Сортировка
-            var result = from r in rating
-                    orderby r
-                    select r;
+            var rating1 = rating.OrderByDescending(x => x.Value);
             stopwatch.Stop();
             Console.WriteLine("Время LINQ сортировки: " + stopwatch.ElapsedMilliseconds); 
-            rating = result as Dictionary<string, int>; 
+            rating = new Dictionary<string, int>();
+            foreach(var i in rating1)
+                rating.TryAdd(i.Key, i.Value);
+            //rating = result as Dictionary<string, int>; 
 
             return rating;
         }
@@ -106,8 +96,8 @@ namespace TextProcessingDll
             //Словарь переписывается в массив для сортировки
             foreach (var g in rating)
             {
-                element[h].SetWord(g.Key);
-                element[h].SetValue(g.Value);
+                element[h].Word = g.Key;
+                element[h].Value = g.Value;
                 h++;
             }
 
@@ -115,14 +105,13 @@ namespace TextProcessingDll
             //засекаем время начала операции
             stopwatch.Start();
             //Сортировка массива
-            QuickSort(element, 0, element.Length - 1);
+            element = QuickSort(element, 0, element.Length - 1);
             stopwatch.Stop();
-            Console.WriteLine("Время личной сортировки: " + stopwatch.ElapsedMilliseconds);   
+            Console.WriteLine("Время личной сортировки: " + stopwatch.ElapsedMilliseconds);
 
+            rating = new Dictionary<string, int>();
             foreach(Element i in element)
-            {
-                rating.TryAdd(i.GetWord(), i.GetValue());
-            }  
+                rating.TryAdd(i.Word, i.Value);
 
             return rating;
         }
@@ -135,54 +124,48 @@ namespace TextProcessingDll
             Element temp = new Element();
             for (int i = minIndex; i < maxIndex; i++)
             {
-                if (array[i].GetValue() > array[maxIndex].GetValue())
+                if (array[i].Value > array[maxIndex].Value)
                 {
                     pivot++;
-                    temp.SetValue(array[pivot].GetValue());
-                    temp.SetWord(array[pivot].GetWord());
+                    temp.Value = array[pivot].Value;
+                    temp.Word = array[pivot].Word;
 
-                    array[pivot].SetValue(array[i].GetValue());
-                    array[pivot].SetWord(array[i].GetWord());
+                    array[pivot].Value = array[i].Value;
+                    array[pivot].Word = array[i].Word;
 
-                    array[i].SetValue(temp.GetValue());
-                    array[i].SetWord(temp.GetWord());
+                    array[i].Value = temp.Value;
+                    array[i].Word = temp.Word;
                 }
             }
             pivot++;
 
-            temp.SetValue(array[pivot].GetValue());
-            temp.SetWord(array[pivot].GetWord());
+            temp.Value = array[pivot].Value;
+            temp.Word = array[pivot].Word;
 
-            array[pivot].SetValue(array[maxIndex].GetValue());
-            array[pivot].SetWord(array[maxIndex].GetWord());
+            array[pivot].Value = array[maxIndex].Value;
+            array[pivot].Word = array[maxIndex].Word;
 
-            array[maxIndex].SetValue(temp.GetValue());
-            array[maxIndex].SetWord(temp.GetWord());
+            array[maxIndex].Value = temp.Value;
+            array[maxIndex].Word = temp.Word;
 
             return pivot;
         }
 
         //Быстра сортировка
-        async static Task QuickSort(Element[] array, int minIndex, int maxIndex)
+        static Element[] QuickSort(Element[] array, int minIndex, int maxIndex)
         {
             Console.WriteLine("QuickSort");
             if (minIndex >= maxIndex)
             {
-                return;
+                return array;
             }
 
             int pivot = FindPivot(array, minIndex, maxIndex);
             
-            var left = QuickSort(array, minIndex, pivot - 1);
-            var right =  QuickSort(array, pivot + 1, maxIndex);
+            QuickSort(array, minIndex, pivot - 1);
+            QuickSort(array, pivot + 1, maxIndex);
 
-            await Task.WhenAll(left, right);
-
-            if(element.Length == array.Length)
-                element = array;
-
-
-            return;
+            return array;
         }
     }
 
