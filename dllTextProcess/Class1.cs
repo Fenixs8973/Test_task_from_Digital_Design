@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Collections.Generic;
+using System.Diagnostics;
+
 
 namespace TextProcessingDll
 {
@@ -25,10 +27,10 @@ namespace TextProcessingDll
             }
         }
 
-        static Element[] element;
+        
         
         //Публичный метод обработки
-        public Dictionary<string, int> ProcessingPublic(string text)
+        public Dictionary<string, int> ProcessingLinq(string text)
         {
             //Словарь, куда в начале будут добавляться слова и их количество
             Dictionary<string, int> rating = new Dictionary<string, int>();
@@ -55,27 +57,16 @@ namespace TextProcessingDll
                 }
             }
 
-            element = new Element[ValueLines];
-            int h = 0;
-
-            //Словарь переписывается в массив для сортировки
-            foreach (var g in rating)
-            {
-                element[h].SetWord(g.Key);
-                element[h].SetValue(g.Value);
-                h++;
-            }
-
-            //Сортировка массива
-            var thread = new Thread(() => QuickSort(element, 0, element.Length - 1));
-
-
-            rating = new Dictionary<string, int>();
-
-            foreach (var i in element)
-            {
-                rating.TryAdd(i.GetWord(), i.GetValue());
-            }
+            Stopwatch stopwatch = new Stopwatch();
+            //засекаем время начала операции
+            stopwatch.Start();
+            //Сортировка
+            var result = from r in rating
+                    orderby r
+                    select r;
+            stopwatch.Stop();
+            Console.WriteLine("Время LINQ сортировки: " + stopwatch.ElapsedMilliseconds); 
+            rating = result as Dictionary<string, int>; 
 
             return rating;
         }
@@ -108,7 +99,7 @@ namespace TextProcessingDll
                 }
             }
 
-            element = new Element[ValueLines];
+            Element[] element = new Element[ValueLines];
             int h = 0;
 
             //Словарь переписывается в массив для сортировки
@@ -119,16 +110,18 @@ namespace TextProcessingDll
                 h++;
             }
 
+            Stopwatch stopwatch = new Stopwatch();
+            //засекаем время начала операции
+            stopwatch.Start();
             //Сортировка массива
-            QuickSort(element, 0, element.Length - 1);
+            element = QuickSort(element, 0, element.Length - 1);
+            stopwatch.Stop();
+            Console.WriteLine("Время личной сортировки: " + stopwatch.ElapsedMilliseconds);   
 
-
-            rating = new Dictionary<string, int>();
-
-            foreach (var i in element)
+            foreach(Element i in element)
             {
                 rating.TryAdd(i.GetWord(), i.GetValue());
-            }
+            }  
 
             return rating;
         }
@@ -169,12 +162,12 @@ namespace TextProcessingDll
         }
 
         //Быстра сортировка
-        static void QuickSort(Element[] array, int minIndex, int maxIndex)
+        static Element[] QuickSort(Element[] array, int minIndex, int maxIndex)
         {
             Console.WriteLine("QuickSort");
             if (minIndex >= maxIndex)
             {
-                return;
+                return array;
             }
 
             int pivot = FindPivot(array, minIndex, maxIndex);
@@ -182,10 +175,7 @@ namespace TextProcessingDll
             QuickSort(array, minIndex, pivot - 1);
             QuickSort(array, pivot + 1, maxIndex);
 
-            if(element.Length == array.Length)
-                element = array;
-
-            return;
+            return array;
         }
     }
 

@@ -25,13 +25,13 @@ class MyClass
         //Вызываем приватный метод
         var result = (Dictionary<string, int>)mi.Invoke(TS, new object[] { text }); 
         stopwatch.Stop();
-        Console.WriteLine("Время работы приватного метода: " + stopwatch.ElapsedMilliseconds);     
+        Console.WriteLine("Время работыв целом через личный метод сортировки: " + stopwatch.ElapsedMilliseconds);     
 
         stopwatch = new Stopwatch();
         stopwatch.Start();
-        TS.ProcessingPublic(WarAndPeace);
+        TS.ProcessingLinq(WarAndPeace);
         stopwatch.Stop();
-        Console.WriteLine("Время работы публичного метода: " + stopwatch.ElapsedMilliseconds); 
+        Console.WriteLine("Время работы в целом через LINQ: " + stopwatch.ElapsedMilliseconds); 
         
         path = @"Result.txt";
         //Переписывание отсортированного массива в итоговый файл
